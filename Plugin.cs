@@ -21,7 +21,7 @@ namespace EmployeesImporterPlugin
         {
             logger.Info("Start importing");
 
-            var employeesResponse = GetUsersAsync().Result;
+            var employeesResponse = GetEmployeeAsync().Result;
 
             logger.Info($"Imported {employeesResponse.Count} employees");
 
@@ -53,11 +53,11 @@ namespace EmployeesImporterPlugin
             return employees;
         }
 
-        private async Task<List<EmployeeResponse>> GetUsersAsync()
+        private async Task<List<EmployeeResponse>> GetEmployeeAsync()
         {
             var response = await _httpClient.GetStringAsync("https://dummyjson.com/users");
-            var usersData = JsonConvert.DeserializeObject<EmployeesApiResponse>(response);
-            return usersData.Users;
+            var employeesData = JsonConvert.DeserializeObject<EmployeesApiResponse>(response);
+            return employeesData.Users;
         }
     }
 }
